@@ -5,6 +5,7 @@ import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutl
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from '../components/Comments';
+import VideoCard from '../components/VideoCard';
 
 
 const Container = styled.div`
@@ -143,7 +144,14 @@ const Video = () => {
         <Comments />
       </Content>
 
-      <Recommendation>Recommendation</Recommendation>
+      <Recommendation>
+        <VideoCard type="recommend" />
+        <VideoCard type="recommend" />
+        <VideoCard type="recommend" />
+        <VideoCard type="recommend" />
+        <VideoCard type="recommend" />
+        <VideoCard type="recommend" />
+      </Recommendation>
 
     </Container>
   )
