@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
@@ -41,17 +42,19 @@ const Info = styled.div`
 
 const VideoCard = () => {
     return (
-        <Container>
-            <Image src="https://static-cse.canva.com/blob/951430/1600w-wK95f3XNRaM.jpg" />
-            <Details>
-                <ChannelImage src='https://i.pinimg.com/736x/b0/ce/89/b0ce89c349573bae1264017ce5deb3b7.jpg' />
-                <Texts>
-                    <Title>My first youtube video gone viral</Title>
-                    <ChannelName>Mohit Kumar</ChannelName>
-                    <Info>42458 views • 2 day ago</Info>
-                </Texts>
-            </Details>
-        </Container>
+        <Link to="/video/test" style={{ textDecoration: "none" }}>
+            <Container>
+                <Image src="https://static-cse.canva.com/blob/951430/1600w-wK95f3XNRaM.jpg" />
+                <Details>
+                    <ChannelImage src='https://i.pinimg.com/736x/b0/ce/89/b0ce89c349573bae1264017ce5deb3b7.jpg' />
+                    <Texts>
+                        <Title>My first youtube video gone viral</Title>
+                        <ChannelName>Mohit Kumar</ChannelName>
+                        <Info>42458 views • 2 day ago</Info>
+                    </Texts>
+                </Details>
+            </Container>
+        </Link>
     )
 }
 

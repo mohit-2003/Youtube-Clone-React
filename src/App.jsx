@@ -33,7 +33,9 @@ function App() {
             <Wrapper>
               <Routes>
                 <Route exact path="/" element={<Home />} />
-                <Route path="/video:id" element={<Video />} />
+                <Route path="video">
+                  <Route path=":id" element={<Video />} />
+                </Route>
               </Routes>
 
             </Wrapper>
