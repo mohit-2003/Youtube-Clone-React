@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import brandLogo from "../images/logo.png"
 import { appName } from '../utils/Constants'
 import HomeIcon from '@mui/icons-material/Home';
-import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
@@ -11,23 +10,25 @@ import LibraryMusicOutlinedIcon from "@mui/icons-material/LibraryMusicOutlined";
 import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import SportsBasketballOutlinedIcon from "@mui/icons-material/SportsBasketballOutlined";
 import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import { Link } from 'react-router-dom';
+import SmartDisplayOutlinedIcon from '@mui/icons-material/SmartDisplayOutlined';
+import WatchLaterOutlinedIcon from '@mui/icons-material/WatchLaterOutlined';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 
 const Container = styled.div`
     flex: 1;
     background-color: ${({ theme }) => theme.bgLighter};
-    /* height: 100vh; */
+    height: 100vh;
     color: ${({ theme }) => theme.text};
     font-size: 14px;
     position: sticky;
-    top: 0;
+    top: 0;  
+    overflow: auto;
 `;
 
 const Wrapper = styled.div`
@@ -64,7 +65,6 @@ border: 0.5px solid ${({ theme }) => theme.soft};;
 `
 
 const LoginLayout = styled.div`
-
 `
 
 const LoginButton = styled.button`
@@ -80,7 +80,11 @@ cursor: pointer;
 margin-top: 10px;
 font-weight: 500;
 `
-
+const Heading = styled.div`
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 16px;
+`
 const Menu = ({ darkMode, setDarkMode }) => {
     return (
         <Container>
@@ -97,10 +101,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
                         Home
                     </Item>
                 </Link>
-                <Item>
-                    <ExploreOutlinedIcon />
-                    Explore
-                </Item>
+                <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                    <Item>
+                        <VideoLibraryOutlinedIcon />
+                        Shorts
+                    </Item>
+                </Link>
                 <Item>
                     <SubscriptionsOutlinedIcon />
                     Subscriptions
@@ -114,12 +120,25 @@ const Menu = ({ darkMode, setDarkMode }) => {
                     <HistoryOutlinedIcon />
                     History
                 </Item>
+                <Item>
+                    <SmartDisplayOutlinedIcon />
+                    Your videos
+                </Item>
+                <Item>
+                    <WatchLaterOutlinedIcon />
+                    Watch Later
+                </Item>
+                <Item>
+                    <ThumbUpOutlinedIcon />
+                    Liked videos
+                </Item>
                 <Hr />
                 <LoginLayout>
-                    Sign in to like videos, comment and subcribe
-                    <LoginButton><AccountCircleOutlinedIcon /> SIGN IN</LoginButton>
+                    Sign in to like videos, comment and subscribe
+                    <LoginButton><AccountCircleOutlinedIcon />SIGN IN</LoginButton>
                 </LoginLayout>
                 <Hr />
+                <Heading>Subscriptions</Heading>
                 <Item>
                     <LibraryMusicOutlinedIcon />
                     Music
@@ -134,15 +153,7 @@ const Menu = ({ darkMode, setDarkMode }) => {
                 </Item>
                 <Item>
                     <MovieOutlinedIcon />
-                    Movies
-                </Item>
-                <Item>
-                    <ArticleOutlinedIcon />
-                    News
-                </Item>
-                <Item>
-                    <LiveTvOutlinedIcon />
-                    Live
+                    Films
                 </Item>
                 <Hr />
                 <Item>
