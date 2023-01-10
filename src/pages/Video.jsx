@@ -94,6 +94,8 @@ const Recommendation = styled.div`
   flex:2;
 `
 const Video = () => {
+
+  
   return (
     <Container>
       <Content>

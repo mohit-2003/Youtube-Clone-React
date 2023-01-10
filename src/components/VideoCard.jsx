@@ -43,17 +43,18 @@ font-size: 14px;
 color: ${({ theme }) => theme.textSoft};
 `
 
-const VideoCard = ({ type }) => {
+const VideoCard = ({ type, video }) => {
+    console.log(video);
     return (
-        <Link to="/video/test" style={{ textDecoration: "none" }}>
+        <Link to={`/video/${video.videoId}`} style={{ textDecoration: "none" }}>
             <Container type={type}>
-                <Image type={type} src="https://static-cse.canva.com/blob/951430/1600w-wK95f3XNRaM.jpg" />
+                <Image type={type} src={video?.thumbnails[0]?.url} />
                 <Details type={type}>
-                    <ChannelImage type={type} src='https://i.pinimg.com/736x/b0/ce/89/b0ce89c349573bae1264017ce5deb3b7.jpg' />
+                    <ChannelImage type={type} src={video?.author?.avatar[0]?.url} />
                     <Texts>
-                        <Title>My first youtube video gone viral</Title>
-                        <ChannelName>Mohit Kumar</ChannelName>
-                        <Info>42458 views • 2 day ago</Info>
+                        <Title>{video?.title}</Title>
+                        <ChannelName>{video?.author?.title}</ChannelName>
+                        <Info>{video?.stats?.views || video?.stats?.viewers} views {video.publishedTimeText && "• " + video?.publishedTimeText}</Info>
                     </Texts>
                 </Details>
             </Container>
