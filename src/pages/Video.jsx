@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutlined";
@@ -6,6 +6,8 @@ import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from '../components/Comments';
 import VideoCard from '../components/VideoCard';
+import { useParams } from 'react-router-dom';
+import fetchData from '../utils/Api';
 
 
 const Container = styled.div`
@@ -93,9 +95,37 @@ const SubscribeButton = styled.button`
 const Recommendation = styled.div`
   flex:2;
 `
+
+// TODO: Use redux to save video details from hone page
 const Video = () => {
 
-  
+  const { videoId } = useParams();
+  const [video, setVideo] = useState({});
+  const [relatedVideo, setRelatedVideo] = useState([]);
+
+  useEffect(() => {
+    fetchVideoDetails();
+    fetchRelatedVideos();
+  }, [videoId]);
+
+  const fetchVideoDetails = async () => {
+    try {
+      const res = await fetchData("video/details/?id=" + videoId);
+      setVideo(res);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const fetchRelatedVideos = async () => {
+    try {
+      const { contents } = await fetchData("video/related-contents/?id=" + videoId);
+      setRelatedVideo(contents);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
   return (
     <Container>
       <Content>
@@ -110,14 +140,14 @@ const Video = () => {
             allowfullscreen
           ></iframe>
         </VideoWrapper>
-        <Title>My first youtube video gone viral</Title>
+        <Title>{video?.title}</Title>
         <Details>
           <Info>
-            42458 views • 2 day ago
+            {video?.stats?.views || video?.stats?.viewers} views {video?.publishedTimeText && "• " + video?.publishedTimeText}
           </Info>
           <Buttons>
             <Button>
-              <ThumbUpOutlinedIcon /> 123
+              <ThumbUpOutlinedIcon /> {video?.stats?.likes}
             </Button>
             <Button>
               <ThumbDownOffAltOutlinedIcon /> Dislike
@@ -133,11 +163,11 @@ const Video = () => {
         <Hr />
         <Channel>
           <ChannelInfo>
-            <ChannelImage src='https://i.pinimg.com/736x/b0/ce/89/b0ce89c349573bae1264017ce5deb3b7.jpg' />
+            <ChannelImage src={video?.author?.avatar[0]?.url} />
             <ChannelDetail>
-              <ChannelName>Mohit Kumar</ChannelName>
-              <ChannelCounter>56K subscribers</ChannelCounter>
-              <Description>Lorem ipsum dolor sit amet consectetur adipisicing elit. At quas, optio amet, officia voluptas consectetur illum molestiae assumenda a aliquid dolore dolorum eligendi! Distinctio commodi debitis dignissimos. Dolorem, magnam saepe eaque voluptates harum sunt optio beatae corrupti, aspernatur recusandae hic. Nam cum quo magni necessitatibus. Nam, animi! Quasi laudantium deserunt, excepturi itaque dignissimos qui! Cum, iure.</Description>
+              <ChannelName>{video?.author?.title}</ChannelName>
+              <ChannelCounter>{video?.author?.stats?.subscribersText}</ChannelCounter>
+              <Description>{video?.description}</Description>
             </ChannelDetail>
           </ChannelInfo>
           <SubscribeButton>SUBSCRIBE</SubscribeButton>
@@ -147,12 +177,11 @@ const Video = () => {
       </Content>
 
       <Recommendation>
-        <VideoCard type="recommend" />
-        <VideoCard type="recommend" />
-        <VideoCard type="recommend" />
-        <VideoCard type="recommend" />
-        <VideoCard type="recommend" />
-        <VideoCard type="recommend" />
+        {relatedVideo?.map((item) => {
+          return (
+            <VideoCard key={item.video.videoId} type="recommend" video={item.video} />
+          )
+        })}
       </Recommendation>
 
     </Container>

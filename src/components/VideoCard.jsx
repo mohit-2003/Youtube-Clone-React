@@ -44,9 +44,8 @@ color: ${({ theme }) => theme.textSoft};
 `
 
 const VideoCard = ({ type, video }) => {
-    console.log(video);
     return (
-        <Link to={`/video/${video.videoId}`} style={{ textDecoration: "none" }}>
+        <Link to={`/video/${video?.videoId}`} style={{ textDecoration: "none" }}>
             <Container type={type}>
                 <Image type={type} src={video?.thumbnails[0]?.url} />
                 <Details type={type}>
@@ -54,7 +53,7 @@ const VideoCard = ({ type, video }) => {
                     <Texts>
                         <Title>{video?.title}</Title>
                         <ChannelName>{video?.author?.title}</ChannelName>
-                        <Info>{video?.stats?.views || video?.stats?.viewers} views {video.publishedTimeText && "• " + video?.publishedTimeText}</Info>
+                        <Info>{video?.stats?.views || video?.stats?.viewers} views {video?.publishedTimeText && "• " + video?.publishedTimeText}</Info>
                     </Texts>
                 </Details>
             </Container>

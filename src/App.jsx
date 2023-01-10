@@ -34,7 +34,7 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="video">
-                  <Route path=":id" element={<Video />} />
+                  <Route path=":videoId" element={<Video />} />
                 </Route>
               </Routes>
 

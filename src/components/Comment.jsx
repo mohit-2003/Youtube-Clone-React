@@ -33,16 +33,15 @@ color: ${({ theme }) => theme.text};
 `
 
 
-const Comment = () => {
+const Comment = ({ comment }) => {
     return (
         <Container>
-            <Avatar src="https://i.pinimg.com/736x/b0/ce/89/b0ce89c349573bae1264017ce5deb3b7.jpg" />
+            <Avatar src={comment?.author?.avatar?.[0]?.url} />
             <Details>
-                <Name>Rishav Kumar
-                    <Date>1 day ago</Date>
+                <Name>{comment?.author?.title}
+                    <Date>{comment?.publishedTimeText}</Date>
                 </Name>
-
-                <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non perspiciatis inventore veritatis. Aperiam dolores cum deleniti ab consequuntur minima autem, provident illo quasi minus nobis ea maiores! Nam, culpa? Vitae iste est quas ea nulla!</Text>
+                <Text>{comment?.content}</Text>
             </Details>
         </Container>
     )
