@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { SearchOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
 position: sticky;
@@ -27,12 +28,16 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 padding: 5px;
-border: 1px solid #ccc;
-border-radius: 3px;
+border: 0.2px solid ${({ theme }) => theme.textSoft};
+border-radius: 40px;
 `
 const Input = styled.input`
     border: none;
     background-color: transparent;
+    padding-left: 8px;
+    outline: none;
+    color: ${({ theme }) => theme.text};
+    
 `
 const LoginButton = styled.button`
 display: flex;
@@ -46,13 +51,30 @@ border-radius: 3px;
 cursor: pointer;
 font-weight: 500;
 `
+const SearchOutlinedIcon = styled(SearchOutlined)`
+  color: ${props => props.theme.text};
+  padding-right: 8px;
+  cursor: pointer;
+`;
+
 const Navbar = () => {
+    const [searchQuery, setSearchQuery] = useState("");
+    const navigate = useNavigate();
+    const searchQueryHandler = (event) => {
+        if (
+            (event?.key === "Enter" || event === "btnClick") &&
+            searchQuery?.length > 0
+        ) {
+            navigate(`/search-results/${searchQuery}`);
+        }
+    };
     return (
         <Container>
             <Wrapper>
                 <Search>
-                    <Input placeholder='Search' />
-                    <SearchOutlined />
+                    <Input placeholder='Search' onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyUp={searchQueryHandler} value={searchQuery} />
+                    <SearchOutlinedIcon onClick={() => searchQueryHandler("btnClick")} />
                 </Search>
                 <LoginButton><AccountCircleOutlinedIcon /> SIGN IN</LoginButton>
             </Wrapper>

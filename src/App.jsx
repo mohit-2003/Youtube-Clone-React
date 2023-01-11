@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import { lightTheme, darkTheme } from "./utils/Theme"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Video from "./pages/Video";
+import Search from "./pages/Search";
 
 const Container = styled.div`
 display: flex;
@@ -36,8 +37,8 @@ function App() {
                 <Route path="video">
                   <Route path=":videoId" element={<Video />} />
                 </Route>
+                <Route path="/search-results/:query" element={<Search />} />
               </Routes>
-
             </Wrapper>
           </Main>
         </BrowserRouter>
